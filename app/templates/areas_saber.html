@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pessoas</title>
+    <!-- Incluindo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">Sistema Acadêmico</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/pessoas/">Pessoa</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/ocupacoes/">Ocupação</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cidades/">Cidade</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/instituicoes/">Instituição</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cursos/">Curso</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/turmas/">Turma</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/disciplinas/">Disciplina</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/matriculas/">Matrícula</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/areas_saber/">Areas de Saber</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/admin/">Administração</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Áreas do Saber</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for area in areas %}
+                <tr>
+                    <td>{{ area.nome }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="text-center">Nenhuma área cadastrada.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Incluindo jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

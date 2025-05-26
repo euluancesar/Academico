@@ -8,14 +8,26 @@ class Ocupacao(models.Model):
         verbose_name = "Ocupacao"
         verbose_name_plural = "Ocupacoes"
 
+class UF(models.Model):
+    nome = models.CharField(max_length=100)
+    sigla = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.sigla
+    class Meta:
+        verbose_name = "UF"   
+        verbose_name_plural = "USs"
+
 class Cidade(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da Cidade")
-    uf = models.CharField(max_length=2, verbose_name="UF")
+    uf = models.ForeignKey(UF, on_delete=models.CASCADE, verbose_name="UF")  # <-- mudar para FK
+
     def __str__(self):
         return f"{self.nome}, {self.uf}"
     class Meta:
         verbose_name = "Cidade"   
         verbose_name_plural = "Cidades"
+
 
 
 class Pessoa(models.Model):
@@ -56,12 +68,12 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome do Curso")
     carga_horaria_total = models.IntegerField(verbose_name="Carga Horária")
     duracao_meses = models.IntegerField(verbose_name="Duração em meses")
-    areaSaber = models.ForeignKey(AreaSaber, on_delete=models.CASCADE,verbose_name="AreaSaber")
+    areaSaber = models.ForeignKey(AreaSaber, on_delete=models.CASCADE, verbose_name="AreaSaber")
+    instituicao = models.ForeignKey(InstituicaoEnsino, on_delete=models.CASCADE, verbose_name="Instituição", null=True, blank=True)
+
+
     def __str__(self):
         return self.nome
-    class Meta:
-        verbose_name = "Curso"
-        verbose_name_plural = "Cursos"
 
 class Turma(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da Turma")
@@ -81,9 +93,10 @@ class Disciplina(models.Model):
         verbose_name_plural = "Disciplinas"
 
 class Matricula(models.Model):
-    instituicaoEnsino = models.ForeignKey(InstituicaoEnsino, on_delete=models.CASCADE,verbose_name="InstituicaoEnsino")
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name="Curso")
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE,verbose_name="Pessoa")
+    instituicaoEnsino = models.ForeignKey(InstituicaoEnsino, on_delete=models.CASCADE, verbose_name="InstituicaoEnsino")
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name="Curso")
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, verbose_name="Pessoa")
+    turma = models.ForeignKey(Turma, on_delete=models.CASCADE, verbose_name="Turma")  # <-- adiciona FK turma
     data_inicio = models.DateField()
     data_previsao_termino = models.DateField()
     def __str__(self):
@@ -114,15 +127,15 @@ class Avaliacao(models.Model):
 class Frequencia(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE,verbose_name="Curso")
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE,verbose_name="Dsciplina")
-    Pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE,verbose_name="Pessoa")
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE,verbose_name="Pessoa")
     numero_faltas = models.IntegerField(verbose_name="Numero de Faltas")
     def __str__(self):
-        return f"{self.Pessoa}, {self.numero_faltas}"
+        return f"{self.pessoa}, {self.numero_faltas}"
     class Meta:
         verbose_name = "Frequencia"
         verbose_name_plural = "Frequencias"
 
-class Turnos(models.Model):
+class Turno(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome do Turno")
     def __str__(self):
         return self.nome
@@ -146,7 +159,7 @@ class CursoDisciplina(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name="Disciplina")
     carga_horaria = models.IntegerField(verbose_name="Carga Horária")
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name="Curso")
-    periodo = models.ForeignKey(Turnos, on_delete=models.CASCADE, verbose_name="Turno")
+    periodo = models.ForeignKey(Turno, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.disciplina.nome)
@@ -154,6 +167,8 @@ class CursoDisciplina(models.Model):
     class Meta:
         verbose_name = "CursoDisciplina"
         verbose_name_plural = "CursoDisciplinas"
+
+
 
 
 
