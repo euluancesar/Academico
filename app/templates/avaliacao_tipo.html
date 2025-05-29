@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Áreas de Saberes</title>
+    <title>Tipos de Avaliação</title>
     <!-- Incluindo Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
@@ -27,7 +27,7 @@
                 <li class="nav-item"><a class="nav-link text-dark" href="/turmas/">Turma</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="/disciplinas/">Disciplina</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="/matriculas/">Matrícula</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/areas-saber/">Areas de Saber</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/areas_saber/">Areas de Saber</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="/admin/">Administração</a></li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Áreas de Saber</h2>
+        <h2 class="mb-4">Tipos de avaliação</h2>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -43,9 +43,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for area in areas %}
+                {% for avaliacao in avaliacoes %}
                 <tr>
-                    <td>{{ area.nome }}</td>
+                    <td>{{ avaliacao.nome }}</td>
                 </tr>
                 {% empty %}
                 <tr>

@@ -8,16 +8,6 @@ class Ocupacao(models.Model):
         verbose_name = "Ocupacao"
         verbose_name_plural = "Ocupacoes"
 
-# class UF(models.Model):
-#     sigla = models.CharField(max_length=7, primary_key=True)
-#     nome = models.CharField(max_length=100)
-
-#     def __str__(self):
-#         return self.sigla
-#     class Meta:
-#         verbose_name = "UF"   
-#         verbose_name_plural = "UFs"
-
 class Cidade(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da Cidade")
     uf = models.CharField(max_length=2, verbose_name="UF")
